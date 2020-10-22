@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "129460811479",
+    "firebase_url": "https://otlob-54afb.firebaseio.com",
+    "project_id": "otlob-54afb",
+    "storage_bucket": "otlob-54afb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129460811479:android:047ba966ea246117406292",
+        "android_client_info": {
+          "package_name": "com.example.otlob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129460811479-5fifqavbsnbcss8nqbkgvaihvg5hh29v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaO5c4ESECpj8w2y23yB3cL9KhZIUbTJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129460811479-5fifqavbsnbcss8nqbkgvaihvg5hh29v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
