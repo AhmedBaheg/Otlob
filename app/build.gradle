@@ -25,6 +25,10 @@ android {
         enabled = true
     }
 
+    buildFeatures {
+        dataBinding true
+    }
+
 }
 
 dependencies {
@@ -44,6 +48,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-database:19.5.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
+    //RecyclerView
+    implementation 'com.android.support:recyclerview-v7:30.0.0'
+    //CardView
+    implementation 'com.android.support:cardview-v7:30.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
