@@ -52,7 +52,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             binding.edPhoneNumber.requestFocus();
         }else {
             UserViewModel.getINSTANCE().register(str_FullName, str_Email, str_Password, str_PhoneNumber, this);
-            finish();
         }
     }
 }
