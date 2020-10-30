@@ -96,7 +96,10 @@ public class Login extends AppCompatActivity {
 
         binding.btnFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { requestSignInToFacebook(); }});
+            public void onClick(View v) {
+                requestSignInToFacebook();
+            }
+        });
 
     }
 

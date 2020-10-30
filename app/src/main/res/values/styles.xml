@@ -5,11 +5,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--Customize Drawer Bar Theme-->
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <!--Customize Icon Drawer Bar Color-->
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
     </style>
 
     <!-- Customize TextInputLayout -->
 
-    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <item name="android:textColorHint">@color/colorAccent</item>
         <item name="boxStrokeColor">@color/colorPrimaryDark</item>
@@ -32,6 +40,16 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#931a25</item>
 
+    </style>
+
+    <!--Customize Item Drawer Color-->
+    <style name="ThemeOverlay.AppCompat.navTheme" parent="ThemeOverlay.AppCompat.Light">
+
+        <!-- Color of text and icon when SELECTED -->
+        <item name="colorPrimary">@android:color/white</item>
+
+        <!-- Background color when SELECTED -->
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
     </style>
 
 </resources>
