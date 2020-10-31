@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.otlob.R;
+import com.example.otlob.activity.Home;
 import com.example.otlob.adapter.CategoryItemAdapter;
 import com.example.otlob.databinding.FragmentPizzaBinding;
 import com.example.otlob.model.CategoryItem;
@@ -67,7 +68,7 @@ public class Pizza extends Fragment {
         FragmentViewModel.getMUTABLE_RECYCLER().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
             @Override
             public void onChanged(List<CategoryItem> categoryItems) {
-                adapter = new CategoryItemAdapter(getContext(), categoryItems);
+                adapter = new CategoryItemAdapter(getContext(), categoryItems, Pizza.this);
                 binding.recyclerView.setAdapter(adapter);
                 Log.println(Log.ASSERT, "Name", categoryItems.get(1).getName());
             }
@@ -118,6 +119,5 @@ public class Pizza extends Fragment {
             binding.sliderLayout.addSliderView(sliderView);
         }
     }
-
 
 }

@@ -2,8 +2,19 @@ package com.example.otlob.model;
 
 public class CategoryItem {
 
-    String name, imgUrl;
+    String name,imgUrl,key;
     int price;
+
+    public CategoryItem() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getName() {
         return name;

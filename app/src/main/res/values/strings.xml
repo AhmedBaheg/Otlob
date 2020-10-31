@@ -26,5 +26,8 @@
     <string name="pizza">Pizza</string>
     <string name="sushi">Sushi</string>
     <string name="sandwich">Sandwich</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="choose_size">Choose Size</string>
+    <string name="_0_egp">0 EGP</string>
 
 </resources>

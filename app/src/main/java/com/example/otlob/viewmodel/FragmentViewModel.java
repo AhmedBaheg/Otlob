@@ -19,13 +19,16 @@ public class FragmentViewModel extends ViewModel {
 
     // Constants
     private static MutableLiveData<List<CategoryItem>> MUTABLE_RECYCLER;
+    private static MutableLiveData<CategoryItem> MUTABLE_ITEM;
+    private static MutableLiveData<CategoryItem> MUTABLE_SIZE;
     private static FragmentViewModel INSTANCE;
 
     // Firebase
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.CATEGORY);
+    private DatabaseReference refSize = FirebaseDatabase.getInstance().getReference(Constants.SIZE);
 
     // Model
-    CategoryItem model;
+    private CategoryItem model;
 
     // ArrayList
     ArrayList<CategoryItem> itemArrayList;
@@ -37,6 +40,20 @@ public class FragmentViewModel extends ViewModel {
         return MUTABLE_RECYCLER;
     }
 
+    public static MutableLiveData<CategoryItem> getMUTABLE_ITEM() {
+        if (MUTABLE_ITEM == null) {
+            MUTABLE_ITEM = new MutableLiveData<>();
+        }
+        return MUTABLE_ITEM;
+    }
+
+    public static MutableLiveData<CategoryItem> getMUTABLE_SIZE() {
+        if (MUTABLE_SIZE == null) {
+            MUTABLE_SIZE = new MutableLiveData<>();
+        }
+        return MUTABLE_SIZE;
+    }
+
     public static FragmentViewModel getINSTANCE() {
         if (INSTANCE == null) {
             INSTANCE = new FragmentViewModel();
@@ -44,14 +61,14 @@ public class FragmentViewModel extends ViewModel {
         return INSTANCE;
     }
 
-    public void getItemInRecycler(){
+    public void getItemInRecycler() {
 
         itemArrayList = new ArrayList<>();
-
+        itemArrayList.clear();
         ref.child(Constants.CATEGORY_NAME).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     model = dataSnapshot.getValue(CategoryItem.class);
                     itemArrayList.add(model);
                 }
@@ -64,6 +81,42 @@ public class FragmentViewModel extends ViewModel {
             }
         });
 
+    }
+
+    public void getItem() {
+
+        ref.child(Constants.CATEGORY_NAME)
+                .child(Constants.CATEGORY_ITEM_NAME).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                model = snapshot.getValue(CategoryItem.class);
+                FragmentViewModel.getMUTABLE_ITEM().setValue(model);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void getItemSize() {
+        if (Constants.ITEM_SIZE != null) {
+            refSize.child(Constants.CATEGORY_NAME).child(Constants.ITEM_SIZE)
+                    .child(Constants.CATEGORY_ITEM_NAME).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    model = snapshot.getValue(CategoryItem.class);
+                    FragmentViewModel.getMUTABLE_SIZE().setValue(model);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
 }
