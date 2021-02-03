@@ -114,7 +114,12 @@ public class UserViewModel extends ViewModel {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser firebaseUser = auth.getCurrentUser();
-                            user = new User(firebaseUser.getDisplayName(), firebaseUser.getEmail());
+
+                            if (firebaseUser.getPhoneNumber() == null) {
+                                user = new User(firebaseUser.getDisplayName(), firebaseUser.getEmail());
+                            } else {
+                                user = new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getPhoneNumber());
+                            }
 
                             ref.child(Constants.getUID()).setValue(user);
 

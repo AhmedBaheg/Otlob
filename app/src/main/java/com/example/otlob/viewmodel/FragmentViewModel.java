@@ -24,7 +24,7 @@ public class FragmentViewModel extends ViewModel {
     private static FragmentViewModel INSTANCE;
 
     // Firebase
-    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.CATEGORY);
+    private DatabaseReference refCategory = FirebaseDatabase.getInstance().getReference(Constants.CATEGORY);
     private DatabaseReference refSize = FirebaseDatabase.getInstance().getReference(Constants.SIZE);
 
     // Model
@@ -65,7 +65,7 @@ public class FragmentViewModel extends ViewModel {
 
         itemArrayList = new ArrayList<>();
         itemArrayList.clear();
-        ref.child(Constants.CATEGORY_NAME).addValueEventListener(new ValueEventListener() {
+        refCategory.child(Constants.CATEGORY_NAME).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -85,7 +85,7 @@ public class FragmentViewModel extends ViewModel {
 
     public void getItem() {
 
-        ref.child(Constants.CATEGORY_NAME)
+        refCategory.child(Constants.CATEGORY_NAME)
                 .child(Constants.CATEGORY_ITEM_NAME).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

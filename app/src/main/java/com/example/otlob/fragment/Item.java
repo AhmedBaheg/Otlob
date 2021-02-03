@@ -1,5 +1,6 @@
 package com.example.otlob.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.otlob.R;
+import com.example.otlob.activity.Home;
 import com.example.otlob.databinding.FragmentItemBinding;
 import com.example.otlob.model.CategoryItem;
 import com.example.otlob.services.Constants;
@@ -45,12 +47,26 @@ public class Item extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item, container, false);
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_item, container, false);
-        view = binding.getRoot();
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_item, container, false);
+
+//        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_item, container, false);
+        View view = binding.getRoot();
 
         returnData();
+
+        binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String temp = binding.tvSize.getText().toString();
+
+                if (!temp.equalsIgnoreCase("Choose Size")) {
+                    ((Home) getActivity()).loadFragment(new Cart());
+                } else {
+                    Toast.makeText(getContext(), "Please choose your favourite size", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         return view;
     }
