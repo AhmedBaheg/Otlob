@@ -30,5 +30,8 @@
     <string name="choose_size">Choose Size</string>
     <string name="_0_egp">0 EGP</string>
     <string name="purchase">Purchase</string>
+    <string name="you_ll_pay">You\'ll pay</string>
+    <string name="add_more">Add More</string>
+    <string name="order_name">Order Name</string>
 
 </resources>
