@@ -29,5 +29,6 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="choose_size">Choose Size</string>
     <string name="_0_egp">0 EGP</string>
+    <string name="purchase">Purchase</string>
 
 </resources>
