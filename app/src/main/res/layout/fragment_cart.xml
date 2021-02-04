@@ -23,14 +23,14 @@
 
         <ImageButton
             android:id="@+id/btn_add_more"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_above="@+id/btn_purchase"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/tv_border_orange"
             android:gravity="center"
@@ -40,7 +40,7 @@
         <LinearLayout
             android:id="@+id/linear"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_above="@+id/btn_purchase"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -62,22 +62,21 @@
                 android:gravity="center"
                 android:text="@string/you_ll_pay"
                 android:textColor="@android:color/white"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 tools:ignore="NestedWeights" />
 
             <TextView
                 android:id="@+id/tv_total_price"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginEnd="2.5dp"
-                android:layout_marginRight="2.5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2.5dp"
                 android:layout_weight="1"
                 android:background="@drawable/tv_border_white"
                 android:gravity="center"
                 android:text="@string/_0_egp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

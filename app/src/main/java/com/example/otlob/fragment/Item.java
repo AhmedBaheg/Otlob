@@ -55,18 +55,7 @@ public class Item extends Fragment {
 
         returnData();
 
-        binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String temp = binding.tvSize.getText().toString();
 
-                if (!temp.equalsIgnoreCase("Choose Size")) {
-                    ((Home) getActivity()).loadFragment(new Cart());
-                } else {
-                    Toast.makeText(getContext(), "Please choose your favourite size", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
         return view;
     }
@@ -84,6 +73,8 @@ public class Item extends Fragment {
                         .placeholder(R.drawable.placeholder)
                         .error(R.drawable.placeholder)
                         .into(binding.imgItem);
+
+                Constants.imgUrl = categoryItem.getImgUrl();
             }
         });
 
@@ -105,8 +96,23 @@ public class Item extends Fragment {
 
         FragmentViewModel.getMUTABLE_SIZE().observe(getViewLifecycleOwner(), new Observer<CategoryItem>() {
             @Override
-            public void onChanged(CategoryItem categoryItem) {
+            public void onChanged(final CategoryItem categoryItem) {
                 binding.tvItemPrice.setText(categoryItem.getPrice() + " EGP");
+
+                binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String temp = binding.tvSize.getText().toString();
+
+                        if (!temp.equalsIgnoreCase("Choose Size")) {
+                            FragmentViewModel.getINSTANCE().uploadOrderToCart(categoryItem, Constants.imgUrl);
+                            ((Home) getActivity()).loadFragment(new Cart());
+                        } else {
+                            Toast.makeText(getContext(), "Please choose your favourite size", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
             }
         });
 

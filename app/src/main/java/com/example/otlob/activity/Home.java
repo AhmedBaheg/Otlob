@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.otlob.R;
 import com.example.otlob.databinding.ActivityHomeBinding;
+import com.example.otlob.fragment.Cart;
 import com.example.otlob.fragment.Category;
 import com.example.otlob.model.User;
 import com.example.otlob.viewmodel.UserViewModel;
@@ -123,7 +124,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Toast.makeText(this, "Favourite", Toast.LENGTH_LONG).show();
                 break;
             case R.id.my_cart_drawer:
-                Toast.makeText(this, "My Cart", Toast.LENGTH_LONG).show();
+                loadFragment(new Cart());
                 break;
             case R.id.profile_drawer:
                 Toast.makeText(this, "Profile", Toast.LENGTH_LONG).show();

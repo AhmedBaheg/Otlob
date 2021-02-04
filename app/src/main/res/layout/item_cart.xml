@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="110dp">
 
 
     <androidx.cardview.widget.CardView
@@ -14,10 +14,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="25dp"
         app:cardBackgroundColor="#F1F1F1"
         app:cardCornerRadius="30dp"
-        app:cardElevation="3dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,19 +27,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:text="@string/order_name"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/tv_cart_price"
+            android:id="@+id/tv_cart_total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/_0_egp"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
@@ -48,17 +47,18 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="3dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@id/cv"
         app:layout_constraintEnd_toStartOf="@id/cv"
         app:layout_constraintStart_toStartOf="@id/cv"
         app:layout_constraintTop_toTopOf="@id/cv">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_item"
+            android:id="@+id/img_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/placeholder" />
@@ -66,15 +66,54 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="35dp"
-        android:layout_height="100dp"
+        android:layout_width="30dp"
+        android:layout_height="80dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="15dp"
-        app:cardElevation="3dp"
+        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="@id/cv"
         app:layout_constraintEnd_toEndOf="@id/cv"
         app:layout_constraintStart_toEndOf="@id/cv"
-        app:layout_constraintTop_toTopOf="@id/cv" />
+        app:layout_constraintTop_toTopOf="@id/cv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <ImageButton
+                android:id="@+id/btn_add_item_cart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/btn_add" />
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btn_minus_item_cart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_minus" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

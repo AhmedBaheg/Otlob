@@ -70,7 +70,6 @@ public class Pizza extends Fragment {
             public void onChanged(List<CategoryItem> categoryItems) {
                 adapter = new CategoryItemAdapter(getContext(), categoryItems, Pizza.this);
                 binding.recyclerView.setAdapter(adapter);
-                Log.println(Log.ASSERT, "Name", categoryItems.get(1).getName());
             }
         });
 

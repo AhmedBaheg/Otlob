@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.otlob.model.CategoryItem;
+import com.example.otlob.model.MyCart;
 import com.example.otlob.services.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +20,7 @@ public class FragmentViewModel extends ViewModel {
 
     // Constants
     private static MutableLiveData<List<CategoryItem>> MUTABLE_RECYCLER;
+    private static MutableLiveData<List<MyCart>> MUTABLE_CART_RECYCLER;
     private static MutableLiveData<CategoryItem> MUTABLE_ITEM;
     private static MutableLiveData<CategoryItem> MUTABLE_SIZE;
     private static FragmentViewModel INSTANCE;
@@ -26,18 +28,28 @@ public class FragmentViewModel extends ViewModel {
     // Firebase
     private DatabaseReference refCategory = FirebaseDatabase.getInstance().getReference(Constants.CATEGORY);
     private DatabaseReference refSize = FirebaseDatabase.getInstance().getReference(Constants.SIZE);
+    private DatabaseReference refCart = FirebaseDatabase.getInstance().getReference(Constants.CART);
 
     // Model
     private CategoryItem model;
+    private MyCart cart;
 
     // ArrayList
     ArrayList<CategoryItem> itemArrayList;
+    ArrayList<MyCart> cartArrayList;
 
     public static MutableLiveData<List<CategoryItem>> getMUTABLE_RECYCLER() {
         if (MUTABLE_RECYCLER == null) {
             MUTABLE_RECYCLER = new MutableLiveData<>();
         }
         return MUTABLE_RECYCLER;
+    }
+
+    public static MutableLiveData<List<MyCart>> getMUTABLE_CART_RECYCLER() {
+        if (MUTABLE_CART_RECYCLER == null) {
+            MUTABLE_CART_RECYCLER = new MutableLiveData<>();
+        }
+        return MUTABLE_CART_RECYCLER;
     }
 
     public static MutableLiveData<CategoryItem> getMUTABLE_ITEM() {
@@ -117,6 +129,41 @@ public class FragmentViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    public void uploadOrderToCart(CategoryItem model, String imgUrl){
+
+        Constants.CART_KEY = refCart.push().getKey();
+        int piece = 0;
+        int totalItemPrice = model.getPrice() * piece;
+
+        cart = new MyCart(model.getName(), Constants.ITEM_SIZE, imgUrl, Constants.CART_KEY, model.getPrice(), piece, totalItemPrice);
+        refCart.child(Constants.getUID()).child(Constants.CART_KEY).setValue(cart);
+
+    }
+
+    public void getItemToMyCartInRecycler(){
+
+        cartArrayList = new ArrayList<>();
+        cartArrayList.clear();
+
+        refCart.child(Constants.getUID())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            cart = dataSnapshot.getValue(MyCart.class);
+                            cartArrayList.add(cart);
+                        }
+                        FragmentViewModel.getMUTABLE_CART_RECYCLER().setValue(cartArrayList);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
     }
 
 }
