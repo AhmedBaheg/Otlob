@@ -37,6 +37,7 @@
         android:layout_height="60dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="5dp"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/cv_item"
         app:layout_constraintEnd_toStartOf="@+id/cv_item"
         app:layout_constraintStart_toStartOf="@+id/cv_item"

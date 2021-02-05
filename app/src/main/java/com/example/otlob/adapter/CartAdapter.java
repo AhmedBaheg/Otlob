@@ -26,7 +26,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView cart_order_name, tv_cart_total_price, tv_count;
+        private TextView cart_order_name, tv_cart_total_price, tv_cart_size, tv_count;
         private CircleImageView img_cart;
         private ImageButton btn_add_item_cart, btn_minus_item_cart;
 
@@ -36,6 +36,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
             cart_order_name = itemView.findViewById(R.id.cart_order_name);
             tv_cart_total_price = itemView.findViewById(R.id.tv_cart_total_price);
+            tv_cart_size = itemView.findViewById(R.id.tv_cart_size);
             tv_count = itemView.findViewById(R.id.tv_count);
             btn_add_item_cart = itemView.findViewById(R.id.btn_add_item_cart);
             btn_minus_item_cart = itemView.findViewById(R.id.btn_minus_item_cart);
@@ -66,6 +67,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         holder.cart_order_name.setText(model.getOrderName());
         holder.tv_cart_total_price.setText(String.valueOf(model.getTotalItemPrice() + " EGP"));
+        holder.tv_cart_size.setText(model.getSize());
         holder.tv_count.setText(String.valueOf(model.getPiece()));
         Picasso.get()
                 .load(model.getImgUrl())

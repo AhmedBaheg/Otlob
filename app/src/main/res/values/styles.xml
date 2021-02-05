@@ -50,6 +50,7 @@
 
         <!-- Background color when SELECTED -->
         <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
