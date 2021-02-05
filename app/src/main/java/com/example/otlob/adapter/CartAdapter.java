@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +24,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     MyCart model;
+    int count;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView cart_order_name, tv_cart_total_price, tv_cart_size, tv_count;
         private CircleImageView img_cart;
@@ -42,6 +44,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btn_minus_item_cart = itemView.findViewById(R.id.btn_minus_item_cart);
             img_cart = itemView.findViewById(R.id.img_cart);
 
+            btn_add_item_cart.setOnClickListener(this);
+            btn_minus_item_cart.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            count = Integer.parseInt(String.valueOf(tv_count.getText()));
+
+            switch (v.getId()){
+                case R.id.btn_add_item_cart :
+                    if (count < 15){
+                        count++;
+                        tv_count.setText(String.valueOf(count));
+                    }else {
+                        Toast.makeText(context, "Maximum Order", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case R.id.btn_minus_item_cart :
+                    if (count > 1){
+                        count--;
+                        tv_count.setText(String.valueOf(count));
+                    }else {
+                        Toast.makeText(context, "Minimum Order", Toast.LENGTH_SHORT).show();
+                    }
+            }
         }
     }
 
