@@ -45,6 +45,7 @@ public class Cart extends Fragment {
             public void onChanged(List<MyCart> myCarts) {
                 adapter = new CartAdapter(getContext(), myCarts);
                 binding.recyclerCart.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         });
 

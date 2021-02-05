@@ -76,10 +76,10 @@ public class FragmentViewModel extends ViewModel {
     public void getItemInRecycler() {
 
         itemArrayList = new ArrayList<>();
-        itemArrayList.clear();
         refCategory.child(Constants.CATEGORY_NAME).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                itemArrayList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     model = dataSnapshot.getValue(CategoryItem.class);
                     itemArrayList.add(model);
@@ -131,7 +131,7 @@ public class FragmentViewModel extends ViewModel {
         }
     }
 
-    public void uploadOrderToCart(CategoryItem model, String imgUrl){
+    public void uploadOrderToCart(CategoryItem model, String imgUrl) {
 
         Constants.CART_KEY = refCart.push().getKey();
         int piece = 0;
@@ -142,16 +142,16 @@ public class FragmentViewModel extends ViewModel {
 
     }
 
-    public void getItemToMyCartInRecycler(){
+    public void getItemToMyCartInRecycler() {
 
         cartArrayList = new ArrayList<>();
-        cartArrayList.clear();
 
         refCart.child(Constants.getUID())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        cartArrayList.clear();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             cart = dataSnapshot.getValue(MyCart.class);
                             cartArrayList.add(cart);
                         }
@@ -164,6 +164,11 @@ public class FragmentViewModel extends ViewModel {
                     }
                 });
 
+    }
+
+    public void updateTotalPrice(MyCart model, int totalItemPrice, int count) {
+        refCart.child(Constants.getUID()).child(model.getId()).child("totalItemPrice").setValue(totalItemPrice);
+        refCart.child(Constants.getUID()).child(model.getId()).child("piece").setValue(count);
     }
 
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.otlob.R;
 import com.example.otlob.model.MyCart;
 import com.example.otlob.services.Constants;
+import com.example.otlob.viewmodel.FragmentViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,22 +54,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public void onClick(View v) {
 
             count = Integer.parseInt(String.valueOf(tv_count.getText()));
+            int position = getAdapterPosition();
+            model = MyCartList.get(position);
+//            Constants.CART_KEY = model.getId();
 
             switch (v.getId()){
                 case R.id.btn_add_item_cart :
                     if (count < 15){
                         count++;
-                        tv_count.setText(String.valueOf(count));
+                        int totalItemPrice = model.getItemPrice() * count;
+                        FragmentViewModel.getINSTANCE().updateTotalPrice(model, totalItemPrice,count);
                     }else {
-                        Toast.makeText(context, "Maximum Order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Maximum Order", Toast.LENGTH_LONG).show();
                     }
                     break;
                 case R.id.btn_minus_item_cart :
                     if (count > 1){
                         count--;
-                        tv_count.setText(String.valueOf(count));
+                        int totalItemPrice = model.getItemPrice() * count;
+                        FragmentViewModel.getINSTANCE().updateTotalPrice(model, totalItemPrice,count);
                     }else {
-                        Toast.makeText(context, "Minimum Order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Minimum Order", Toast.LENGTH_LONG).show();
                     }
             }
         }
