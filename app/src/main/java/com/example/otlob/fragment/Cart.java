@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.otlob.R;
 import com.example.otlob.adapter.CartAdapter;
@@ -26,6 +27,8 @@ public class Cart extends Fragment {
     private FragmentViewModel model;
     private FragmentCartBinding binding;
     private CartAdapter adapter;
+
+    int temp;
 
 
     @Override
@@ -46,6 +49,13 @@ public class Cart extends Fragment {
                 adapter = new CartAdapter(getContext(), myCarts);
                 binding.recyclerCart.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
+                for (MyCart cart : myCarts) {
+                    temp += cart.getTotalItemPrice();
+                }
+                binding.tvTotalPrice.setText(String.valueOf(temp + " EGP"));
+                temp = 0;
+
             }
         });
 

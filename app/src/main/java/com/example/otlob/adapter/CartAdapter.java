@@ -56,7 +56,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             count = Integer.parseInt(String.valueOf(tv_count.getText()));
             int position = getAdapterPosition();
             model = MyCartList.get(position);
-//            Constants.CART_KEY = model.getId();
 
             switch (v.getId()){
                 case R.id.btn_add_item_cart :
