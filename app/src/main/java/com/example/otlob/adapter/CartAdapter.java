@@ -24,18 +24,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
-    MyCart model;
-    int count;
+    private MyCart model;
+    private int count;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView cart_order_name, tv_cart_total_price, tv_cart_size, tv_count;
+        public TextView cart_order_name, tv_cart_total_price, tv_cart_size, tv_count;
         private CircleImageView img_cart;
         private ImageButton btn_add_item_cart, btn_minus_item_cart;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
 
             cart_order_name = itemView.findViewById(R.id.cart_order_name);
             tv_cart_total_price = itemView.findViewById(R.id.tv_cart_total_price);
@@ -47,6 +48,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
             btn_add_item_cart.setOnClickListener(this);
             btn_minus_item_cart.setOnClickListener(this);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getAdapterPosition();
+                    model = MyCartList.get(position);
+                    FragmentViewModel.getINSTANCE().dialogDeleteItemFromCart(context, model);
+                    return false;
+                }
+            });
 
         }
 

@@ -1,8 +1,11 @@
 package com.example.otlob.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.otlob.R;
+import com.example.otlob.activity.Home;
 import com.example.otlob.adapter.CartAdapter;
 import com.example.otlob.databinding.FragmentCartBinding;
 import com.example.otlob.model.MyCart;
@@ -30,6 +34,11 @@ public class Cart extends Fragment {
 
     int temp;
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +65,14 @@ public class Cart extends Fragment {
                 binding.tvTotalPrice.setText(String.valueOf(temp + " EGP"));
                 temp = 0;
 
+            }
+        });
+
+        binding.btnAddMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Home) getActivity()).loadFragment(new Category());
+                ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }
         });
 

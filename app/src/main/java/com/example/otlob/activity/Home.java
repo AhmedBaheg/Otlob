@@ -49,7 +49,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
-    private ActivityHomeBinding binding;
+    public ActivityHomeBinding binding;
     private UserViewModel model;
 
     private GoogleSignInClient googleSignInClient;
@@ -83,9 +83,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView = findViewById(R.id.nav_menu);
     }
 
-    public void loadFragment(Fragment Fragment) {
+    public void loadFragment(Fragment fragment) {
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, Fragment);
+        fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
 
