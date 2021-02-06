@@ -56,7 +56,6 @@ public class Item extends Fragment {
         returnData();
 
 
-
         return view;
     }
 
@@ -97,14 +96,16 @@ public class Item extends Fragment {
         FragmentViewModel.getMUTABLE_SIZE().observe(getViewLifecycleOwner(), new Observer<CategoryItem>() {
             @Override
             public void onChanged(final CategoryItem categoryItem) {
-                binding.tvItemPrice.setText(categoryItem.getPrice() + " EGP");
+                if (binding.tvSize.getText().toString().equalsIgnoreCase("Choose Size"))
+                    binding.tvItemPrice.setText(0 + " EGP");
+                else
+                    binding.tvItemPrice.setText(categoryItem.getPrice() + " EGP");
 
                 binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String temp = binding.tvSize.getText().toString();
 
-                        if (!temp.equalsIgnoreCase("Choose Size")) {
+                        if (!binding.tvSize.getText().toString().equalsIgnoreCase("Choose Size")) {
                             FragmentViewModel.getINSTANCE().uploadOrderToCart(categoryItem, Constants.imgUrl);
                             ((Home) getActivity()).loadFragment(new Cart());
                         } else {
