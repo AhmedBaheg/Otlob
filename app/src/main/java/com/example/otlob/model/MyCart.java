@@ -14,8 +14,6 @@ public class MyCart {
         this.totalItemPrice = totalItemPrice;
     }
 
-
-
     public MyCart() {
     }
 
@@ -74,4 +72,5 @@ public class MyCart {
     public void setTotalItemPrice(int totalItemPrice) {
         this.totalItemPrice = totalItemPrice;
     }
+
 }

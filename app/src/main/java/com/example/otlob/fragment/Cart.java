@@ -14,11 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.otlob.R;
 import com.example.otlob.activity.Home;
-import com.example.otlob.adapter.CartAdapter;
+import com.example.otlob.adapter.CartItemAdapter;
 import com.example.otlob.databinding.FragmentCartBinding;
 import com.example.otlob.model.MyCart;
 import com.example.otlob.viewmodel.FragmentViewModel;
@@ -30,7 +29,7 @@ public class Cart extends Fragment {
 
     private FragmentViewModel model;
     private FragmentCartBinding binding;
-    private CartAdapter adapter;
+    private CartItemAdapter adapter;
 
     int temp;
 
@@ -55,7 +54,7 @@ public class Cart extends Fragment {
         FragmentViewModel.getMUTABLE_CART_RECYCLER().observe(getViewLifecycleOwner(), new Observer<List<MyCart>>() {
             @Override
             public void onChanged(List<MyCart> myCarts) {
-                adapter = new CartAdapter(getContext(), myCarts);
+                adapter = new CartItemAdapter(getContext(), myCarts);
                 binding.recyclerCart.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
@@ -71,6 +70,15 @@ public class Cart extends Fragment {
         binding.btnAddMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((Home) getActivity()).loadFragment(new Category());
+                ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+        });
+
+        binding.btnPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentViewModel.getINSTANCE().btnPurchase(binding.tvTotalPrice.getText().toString());
                 ((Home) getActivity()).loadFragment(new Category());
                 ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }

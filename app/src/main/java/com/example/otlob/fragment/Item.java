@@ -104,7 +104,6 @@ public class Item extends Fragment {
                 binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         if (!binding.tvSize.getText().toString().equalsIgnoreCase("Choose Size")) {
                             FragmentViewModel.getINSTANCE().uploadOrderToCart(categoryItem, Constants.imgUrl);
                             ((Home) getActivity()).loadFragment(new Cart());

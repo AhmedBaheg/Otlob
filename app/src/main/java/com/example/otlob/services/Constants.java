@@ -8,6 +8,7 @@ public class Constants {
     public static String CATEGORY = "Category";
     public static String SIZE = "Size";
     public static String CART = "Cart";
+    public static String ORDER = "Order";
     public static String CATEGORY_NAME;
     public static String CATEGORY_ITEM_NAME;
     public static String ITEM_SIZE;

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.otlob.R;
 import com.example.otlob.model.MyCart;
-import com.example.otlob.services.Constants;
 import com.example.otlob.viewmodel.FragmentViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -22,7 +20,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHolder> {
 
     private MyCart model;
     private int count;
@@ -93,7 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
     private List<MyCart> MyCartList;
 
-    public CartAdapter(Context context, List<MyCart> MyCartList) {
+    public CartItemAdapter(Context context, List<MyCart> MyCartList) {
         this.context = context;
         this.MyCartList = MyCartList;
     }
