@@ -203,36 +203,6 @@ public class FragmentViewModel extends ViewModel {
                 .show();
     }
 
-    public void btnPurchase(final String value) {
-        /** can't use ( addValueEventListener ) in this status because will make pug and I will move single data
-         not collection from data */
-        refCart.child(Constants.getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                final String key = refCart.push().getKey();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    cart = dataSnapshot.getValue(MyCart.class);
 
-                    refOrder.child(Constants.getUID()).child(key).child(cart.getId()).setValue(cart)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        refCart.child(Constants.getUID()).child(cart.getId()).removeValue();
-                                        refOrder.child(Constants.getUID()).child(key).child("totalOrderPrice").setValue(value);
-                                        refOrder.child(Constants.getUID()).child(key).child("key").setValue(key);
-                                    }
-                                }
-                            });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 }
