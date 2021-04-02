@@ -2,10 +2,8 @@ package com.example.otlob.fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +13,14 @@ import android.widget.TextView;
 import com.example.otlob.R;
 import com.example.otlob.activity.Home;
 import com.example.otlob.services.Constants;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 
-public class Category extends Fragment {
+public class CategoryFragment extends Fragment {
 
     private ImageView img_pizza;
     TextView pizza;
 
-    public Category() {
+    public CategoryFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +36,7 @@ public class Category extends Fragment {
         img_pizza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Home) getActivity()).loadFragment(new Pizza());
+                ((Home) getActivity()).loadFragment(new PizzaFragment());
                 Constants.CATEGORY_NAME = pizza.getText().toString();
             }
         });

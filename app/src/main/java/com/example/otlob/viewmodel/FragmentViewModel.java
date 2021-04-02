@@ -2,6 +2,7 @@ package com.example.otlob.viewmodel;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.otlob.model.CategoryItem;
 import com.example.otlob.model.MyCart;
 import com.example.otlob.model.Receipt;
+import com.example.otlob.model.SubReceipt;
 import com.example.otlob.services.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +31,7 @@ public class FragmentViewModel extends ViewModel {
     // Constants
     private static MutableLiveData<List<CategoryItem>> MUTABLE_RECYCLER;
     private static MutableLiveData<List<MyCart>> MUTABLE_CART_RECYCLER;
+    private static MutableLiveData<List<Receipt>> MUTABLE_ORDER_RECYCLER;
     private static MutableLiveData<CategoryItem> MUTABLE_ITEM;
     private static MutableLiveData<CategoryItem> MUTABLE_SIZE;
     private static FragmentViewModel INSTANCE;
@@ -47,6 +50,7 @@ public class FragmentViewModel extends ViewModel {
     // ArrayList
     ArrayList<CategoryItem> itemArrayList;
     ArrayList<MyCart> cartArrayList;
+    ArrayList<Receipt> orderArrayList;
 
     public static MutableLiveData<List<CategoryItem>> getMUTABLE_RECYCLER() {
         if (MUTABLE_RECYCLER == null) {
@@ -60,6 +64,13 @@ public class FragmentViewModel extends ViewModel {
             MUTABLE_CART_RECYCLER = new MutableLiveData<>();
         }
         return MUTABLE_CART_RECYCLER;
+    }
+
+    public static MutableLiveData<List<Receipt>> getMUTABLE_ORDER_RECYCLER() {
+        if (MUTABLE_ORDER_RECYCLER == null) {
+            MUTABLE_ORDER_RECYCLER = new MutableLiveData<>();
+        }
+        return MUTABLE_ORDER_RECYCLER;
     }
 
     public static MutableLiveData<CategoryItem> getMUTABLE_ITEM() {
@@ -217,8 +228,8 @@ public class FragmentViewModel extends ViewModel {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        refCart.child(Constants.getUID()).child(cart.getId()).removeValue();
+                                    if (task.isSuccessful()) {
+                                        refCart.child(Constants.getUID()).removeValue();
                                         refOrder.child(Constants.getUID()).child(key).child("totalOrderPrice").setValue(value);
                                         refOrder.child(Constants.getUID()).child(key).child("key").setValue(key);
                                     }
@@ -233,6 +244,29 @@ public class FragmentViewModel extends ViewModel {
 
             }
         });
+    }
+
+    public void getItemToOrderInRecycler() {
+
+        orderArrayList = new ArrayList<>();
+
+        refOrder.child(Constants.getUID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                orderArrayList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    orderArrayList.add(dataSnapshot.getValue(Receipt.class));
+                }
+                FragmentViewModel.getMUTABLE_ORDER_RECYCLER().setValue(orderArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

@@ -25,7 +25,7 @@ import com.example.otlob.viewmodel.FragmentViewModel;
 import java.util.List;
 
 
-public class Cart extends Fragment {
+public class CartFragment extends Fragment {
 
     private FragmentViewModel model;
     private FragmentCartBinding binding;
@@ -70,7 +70,7 @@ public class Cart extends Fragment {
         binding.btnAddMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Home) getActivity()).loadFragment(new Category());
+                ((Home) getActivity()).loadFragment(new CategoryFragment());
                 ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }
         });
@@ -79,7 +79,7 @@ public class Cart extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentViewModel.getINSTANCE().btnPurchase(binding.tvTotalPrice.getText().toString());
-                ((Home) getActivity()).loadFragment(new Category());
+                ((Home) getActivity()).loadFragment(new CategoryFragment());
                 ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }
         });

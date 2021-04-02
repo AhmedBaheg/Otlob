@@ -1,11 +1,9 @@
 package com.example.otlob.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.otlob.R;
 import com.example.otlob.activity.Home;
-import com.example.otlob.fragment.Item;
-import com.example.otlob.fragment.Pizza;
+import com.example.otlob.fragment.ItemFragment;
+import com.example.otlob.fragment.PizzaFragment;
 import com.example.otlob.model.CategoryItem;
 import com.example.otlob.services.Constants;
 import com.squareup.picasso.Picasso;
@@ -46,7 +44,7 @@ public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapte
                     int position = getAdapterPosition();
                     model = CategoryItemList.get(position);
                     Constants.CATEGORY_ITEM_NAME = model.getKey();
-                    ((Home) pizza.getActivity()).loadFragment(new Item());
+                    ((Home) pizza.getActivity()).loadFragment(new ItemFragment());
                 }
             });
 
@@ -55,9 +53,9 @@ public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapte
 
     private Context context;
     private List<CategoryItem> CategoryItemList;
-    private Pizza pizza;
+    private PizzaFragment pizza;
 
-    public CategoryItemAdapter(Context context, List<CategoryItem> CategoryItemList, Pizza pizza) {
+    public CategoryItemAdapter(Context context, List<CategoryItem> CategoryItemList, PizzaFragment pizza) {
         this.context = context;
         this.CategoryItemList = CategoryItemList;
         this.pizza = pizza;

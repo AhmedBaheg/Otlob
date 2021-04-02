@@ -46,7 +46,7 @@
     <style name="ThemeOverlay.AppCompat.navTheme" parent="ThemeOverlay.AppCompat.Light">
 
         <!-- Color of text and icon when SELECTED -->
-<!--        <item name="colorPrimary">@android:color/white</item>-->
+<!--        <sub_item_order name="colorPrimary">@android:color/white</sub_item_order>-->
 
         <!-- Background color when SELECTED -->
         <item name="colorControlHighlight">@color/colorPrimaryDark</item>

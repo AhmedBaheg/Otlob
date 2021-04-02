@@ -1,6 +1,5 @@
 package com.example.otlob.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -11,10 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.otlob.R;
@@ -25,14 +20,14 @@ import com.example.otlob.services.Constants;
 import com.example.otlob.viewmodel.FragmentViewModel;
 import com.squareup.picasso.Picasso;
 
-public class Item extends Fragment {
+public class ItemFragment extends Fragment {
 
     private int count;
 
     private FragmentViewModel model;
     private FragmentItemBinding binding;
 
-    public Item() {
+    public ItemFragment() {
         // Required empty public constructor
     }
 
@@ -106,7 +101,7 @@ public class Item extends Fragment {
                     public void onClick(View v) {
                         if (!binding.tvSize.getText().toString().equalsIgnoreCase("Choose Size")) {
                             FragmentViewModel.getINSTANCE().uploadOrderToCart(categoryItem, Constants.imgUrl);
-                            ((Home) getActivity()).loadFragment(new Cart());
+                            ((Home) getActivity()).loadFragment(new CartFragment());
                         } else {
                             Toast.makeText(getContext(), "Please choose your favourite size", Toast.LENGTH_LONG).show();
                         }

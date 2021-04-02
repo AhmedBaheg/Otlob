@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/item"
-        tools:context=".fragment.Item">
+        tools:context=".fragment.ItemFragment">
 
         <TextView
             android:id="@+id/tv_item_name"

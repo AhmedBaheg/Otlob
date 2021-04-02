@@ -11,14 +11,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.otlob.R;
-import com.example.otlob.activity.Home;
 import com.example.otlob.adapter.CategoryItemAdapter;
 import com.example.otlob.databinding.FragmentPizzaBinding;
 import com.example.otlob.model.CategoryItem;
@@ -29,14 +26,14 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.List;
 
 
-public class Pizza extends Fragment {
+public class PizzaFragment extends Fragment {
 
     private FragmentViewModel model;
     private FragmentPizzaBinding binding;
 
     private CategoryItemAdapter adapter;
 
-    public Pizza() {
+    public PizzaFragment() {
         // Required empty public constructor
     }
 
@@ -68,7 +65,7 @@ public class Pizza extends Fragment {
         FragmentViewModel.getMUTABLE_RECYCLER().observe(getViewLifecycleOwner(), new Observer<List<CategoryItem>>() {
             @Override
             public void onChanged(List<CategoryItem> categoryItems) {
-                adapter = new CategoryItemAdapter(getContext(), categoryItems, Pizza.this);
+                adapter = new CategoryItemAdapter(getContext(), categoryItems, PizzaFragment.this);
                 binding.recyclerView.setAdapter(adapter);
             }
         });

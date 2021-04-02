@@ -1,30 +1,11 @@
 package com.example.otlob.model;
 
-import java.util.ArrayList;
+public class SubReceipt {
 
-public class Receipt {
-
-    private String key, totalOrderPrice, orderName, size, imgUrl;
+    private String orderName, size, imgUrl;
     private int idOrder, piece, totalItemPrice;
 
-
-    public Receipt() {
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getTotalOrderPrice() {
-        return totalOrderPrice;
-    }
-
-    public void setTotalOrderPrice(String totalOrderPrice) {
-        this.totalOrderPrice = totalOrderPrice;
+    public SubReceipt() {
     }
 
     public String getOrderName() {
