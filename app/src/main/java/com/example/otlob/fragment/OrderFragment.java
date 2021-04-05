@@ -43,6 +43,7 @@ public class OrderFragment extends Fragment {
 
         FragmentViewModel.getINSTANCE().getItemToOrderInRecycler();
 
+        sub_recyclerView = view.findViewById(R.id.sub_recyclerView);
 
         binding.recyclerViewOrder.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -53,9 +54,7 @@ public class OrderFragment extends Fragment {
 
                 adapter = new OrderAdapter(getContext(), receipts);
                 binding.recyclerViewOrder.setAdapter(adapter);
-
-
-
+//                Log.i("TAG", receipts.get(0).toString());
             }
         });
 

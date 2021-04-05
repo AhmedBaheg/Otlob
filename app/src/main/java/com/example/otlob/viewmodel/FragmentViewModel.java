@@ -3,7 +3,6 @@ package com.example.otlob.viewmodel;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -32,6 +31,7 @@ public class FragmentViewModel extends ViewModel {
     private static MutableLiveData<List<CategoryItem>> MUTABLE_RECYCLER;
     private static MutableLiveData<List<MyCart>> MUTABLE_CART_RECYCLER;
     private static MutableLiveData<List<Receipt>> MUTABLE_ORDER_RECYCLER;
+    private static MutableLiveData<List<SubReceipt>> MUTABLE_SUBORDER_RECYCLER;
     private static MutableLiveData<CategoryItem> MUTABLE_ITEM;
     private static MutableLiveData<CategoryItem> MUTABLE_SIZE;
     private static FragmentViewModel INSTANCE;
@@ -46,12 +46,15 @@ public class FragmentViewModel extends ViewModel {
     private CategoryItem model;
     private MyCart cart;
     private Receipt receipt;
+    private SubReceipt subReceipt;
 
     // ArrayList
-    ArrayList<CategoryItem> itemArrayList;
-    ArrayList<MyCart> cartArrayList;
-    ArrayList<Receipt> orderArrayList;
+    private ArrayList<CategoryItem> itemArrayList;
+    private ArrayList<MyCart> cartArrayList;
+    private ArrayList<Receipt> orderArrayList;
+    private ArrayList<SubReceipt> subReceiptArrayList;
 
+    // Methods
     public static MutableLiveData<List<CategoryItem>> getMUTABLE_RECYCLER() {
         if (MUTABLE_RECYCLER == null) {
             MUTABLE_RECYCLER = new MutableLiveData<>();
@@ -71,6 +74,13 @@ public class FragmentViewModel extends ViewModel {
             MUTABLE_ORDER_RECYCLER = new MutableLiveData<>();
         }
         return MUTABLE_ORDER_RECYCLER;
+    }
+
+    public static MutableLiveData<List<SubReceipt>> getMUTABLE_SUBORDER_RECYCLER() {
+        if (MUTABLE_SUBORDER_RECYCLER == null) {
+            MUTABLE_SUBORDER_RECYCLER = new MutableLiveData<>();
+        }
+        return MUTABLE_SUBORDER_RECYCLER;
     }
 
     public static MutableLiveData<CategoryItem> getMUTABLE_ITEM() {
@@ -256,7 +266,9 @@ public class FragmentViewModel extends ViewModel {
 
                 orderArrayList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    orderArrayList.add(dataSnapshot.getValue(Receipt.class));
+                    receipt = dataSnapshot.getValue(Receipt.class);
+                    orderArrayList.add(0, receipt);
+                    getSubItemToSubOrderInRecycler(dataSnapshot.getKey());
                 }
                 FragmentViewModel.getMUTABLE_ORDER_RECYCLER().setValue(orderArrayList);
             }
@@ -267,6 +279,34 @@ public class FragmentViewModel extends ViewModel {
             }
         });
 
+    }
+
+    public void getSubItemToSubOrderInRecycler(String key) {
+
+        subReceiptArrayList = new ArrayList<>();
+        refOrder.child(Constants.getUID()).child(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                subReceiptArrayList.clear();
+                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
+
+                    if (!dataSnapshot1.getKey().equalsIgnoreCase("key")
+                            && !dataSnapshot1.getKey().equalsIgnoreCase("totalOrderPrice")) {
+
+                        subReceipt = dataSnapshot1.getValue(SubReceipt.class);
+                        subReceiptArrayList.add(subReceipt);
+
+                    }
+
+                }
+                FragmentViewModel.getMUTABLE_SUBORDER_RECYCLER().setValue(subReceiptArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

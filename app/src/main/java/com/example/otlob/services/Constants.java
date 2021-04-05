@@ -12,7 +12,7 @@ public class Constants {
     public static String CATEGORY_NAME;
     public static String CATEGORY_ITEM_NAME;
     public static String ITEM_SIZE;
-    public static String CART_KEY;
+    public static String ORDER_KEY;
     public static String imgUrl;
 
     public static String getUID(){

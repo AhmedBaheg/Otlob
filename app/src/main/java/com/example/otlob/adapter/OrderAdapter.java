@@ -1,6 +1,7 @@
 package com.example.otlob.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.otlob.R;
+import com.example.otlob.fragment.OrderFragment;
 import com.example.otlob.model.Receipt;
+import com.example.otlob.model.SubReceipt;
 import com.example.otlob.viewmodel.FragmentViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -57,15 +62,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         model = ReceiptList.get(position);
 
         holder.tv_OrderID.setText(model.getKey());
         holder.tv_total_order_price.setText(String.valueOf(model.getTotalOrderPrice()));
 
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.sub_recyclerView.getContext());
-//        holder.sub_recyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.sub_recyclerView.getContext());
+        holder.sub_recyclerView.setLayoutManager(layoutManager);
+
+        FragmentViewModel.getMUTABLE_SUBORDER_RECYCLER().observe((LifecycleOwner) context, new Observer<List<SubReceipt>>() {
+            @Override
+            public void onChanged(List<SubReceipt> subReceipts) {
+                subAdapter = new SubOrderAdapter(context , subReceipts);
+                holder.sub_recyclerView.setAdapter(subAdapter);
+                Log.i("TAG" , subReceipts.size()+ "");
+            }
+        });
+
 
     }
 

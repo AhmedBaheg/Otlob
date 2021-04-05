@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.otlob.R;
-import com.example.otlob.model.Receipt;
-import com.example.otlob.model.Receipt;
+import com.example.otlob.model.SubReceipt;
+import com.example.otlob.model.SubReceipt;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SubOrderAdapter extends RecyclerView.Adapter<SubOrderAdapter.ViewHolder> {
 
-    private Receipt model;
+    private SubReceipt model;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,11 +40,11 @@ public class SubOrderAdapter extends RecyclerView.Adapter<SubOrderAdapter.ViewHo
     }
 
     private Context context;
-    public List<Receipt> ReceiptList;
+    public List<SubReceipt> SubReceiptList;
 
-    public SubOrderAdapter(Context context, List<Receipt> ReceiptList) {
+    public SubOrderAdapter(Context context, List<SubReceipt> SubReceiptList) {
         this.context = context;
-        this.ReceiptList = ReceiptList;
+        this.SubReceiptList = SubReceiptList;
     }
 
     @NonNull
@@ -57,7 +57,7 @@ public class SubOrderAdapter extends RecyclerView.Adapter<SubOrderAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        model = ReceiptList.get(position);
+        model = SubReceiptList.get(position);
 
         holder.tv_order_name.setText(model.getOrderName());
         holder.tv_order_size.setText(model.getSize());
@@ -73,7 +73,7 @@ public class SubOrderAdapter extends RecyclerView.Adapter<SubOrderAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return ReceiptList.size();
+        return SubReceiptList.size();
     }
 
 }
