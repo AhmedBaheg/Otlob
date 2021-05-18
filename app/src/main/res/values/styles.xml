@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -46,11 +46,17 @@
     <style name="ThemeOverlay.AppCompat.navTheme" parent="ThemeOverlay.AppCompat.Light">
 
         <!-- Color of text and icon when SELECTED -->
-<!--        <sub_item_order name="colorPrimary">@android:color/white</sub_item_order>-->
+        <!--        <sub_item_order name="colorPrimary">@android:color/white</sub_item_order>-->
 
         <!-- Background color when SELECTED -->
         <item name="colorControlHighlight">@color/colorPrimaryDark</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  Theme Mode  -->
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/Switch</item>
     </style>
 
 </resources>

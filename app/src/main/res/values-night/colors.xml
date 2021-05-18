@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#0C141C</color>
+    <color name="colorPrimaryDark">#84A4DC</color>
+    <color name="colorAccent">#84A4DC</color>
+
+    <color name="Opacity">#4D84A4DC</color>
+    <color name="Profile">#84A4DC</color>
+    <color name="Switch">#0C141C</color>
+
+    <color name="textColor" tools:ignore="MissingDefaultResource">#FFFFFF</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/holo_orange_dark</color>
+
+</resources>

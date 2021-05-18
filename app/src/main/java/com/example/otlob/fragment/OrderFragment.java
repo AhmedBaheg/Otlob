@@ -29,9 +29,7 @@ public class OrderFragment extends Fragment {
     private FragmentViewModel model;
     private FragmentOrderBinding binding;
     private OrderAdapter adapter;
-    private SubOrderAdapter subAdapter;
 
-    private RecyclerView sub_recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,11 +37,9 @@ public class OrderFragment extends Fragment {
         model = new ViewModelProvider(this).get(FragmentViewModel.class);
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false);
-        final View view = binding.getRoot();
+        View view = binding.getRoot();
 
         FragmentViewModel.getINSTANCE().getItemToOrderInRecycler();
-
-        sub_recyclerView = view.findViewById(R.id.sub_recyclerView);
 
         binding.recyclerViewOrder.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -51,10 +47,10 @@ public class OrderFragment extends Fragment {
         FragmentViewModel.getMUTABLE_ORDER_RECYCLER().observe(getViewLifecycleOwner(), new Observer<List<Receipt>>() {
             @Override
             public void onChanged(List<Receipt> receipts) {
-
                 adapter = new OrderAdapter(getContext(), receipts);
                 binding.recyclerViewOrder.setAdapter(adapter);
-//                Log.i("TAG", receipts.get(0).toString());
+                adapter.notifyDataSetChanged();
+//                Log.i("TAG" , receipts.size()+ "");
             }
         });
 

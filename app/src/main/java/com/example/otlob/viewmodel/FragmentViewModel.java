@@ -184,7 +184,7 @@ public class FragmentViewModel extends ViewModel {
                         cartArrayList.clear();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             cart = dataSnapshot.getValue(MyCart.class);
-                            cartArrayList.add(cart);
+                            cartArrayList.add(0, cart);
                         }
                         FragmentViewModel.getMUTABLE_CART_RECYCLER().setValue(cartArrayList);
                     }
@@ -268,6 +268,7 @@ public class FragmentViewModel extends ViewModel {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     receipt = dataSnapshot.getValue(Receipt.class);
                     orderArrayList.add(0, receipt);
+                    Constants.ORDER_KEY = dataSnapshot.getKey();
                     getSubItemToSubOrderInRecycler(dataSnapshot.getKey());
                 }
                 FragmentViewModel.getMUTABLE_ORDER_RECYCLER().setValue(orderArrayList);
@@ -281,10 +282,11 @@ public class FragmentViewModel extends ViewModel {
 
     }
 
-    public void getSubItemToSubOrderInRecycler(String key) {
+    public void getSubItemToSubOrderInRecycler(String keys) {
 
         subReceiptArrayList = new ArrayList<>();
-        refOrder.child(Constants.getUID()).child(key).addValueEventListener(new ValueEventListener() {
+
+        refOrder.child(Constants.getUID()).child(keys).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 subReceiptArrayList.clear();
@@ -294,11 +296,11 @@ public class FragmentViewModel extends ViewModel {
                             && !dataSnapshot1.getKey().equalsIgnoreCase("totalOrderPrice")) {
 
                         subReceipt = dataSnapshot1.getValue(SubReceipt.class);
-                        subReceiptArrayList.add(subReceipt);
-
+                        subReceiptArrayList.add(0, subReceipt);
                     }
 
                 }
+//                Log.i("TAG" , subReceiptArrayList.size()+ "");
                 FragmentViewModel.getMUTABLE_SUBORDER_RECYCLER().setValue(subReceiptArrayList);
             }
 

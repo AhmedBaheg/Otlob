@@ -66,21 +66,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         model = ReceiptList.get(position);
 
-        holder.tv_OrderID.setText(model.getKey());
-        holder.tv_total_order_price.setText(String.valueOf(model.getTotalOrderPrice()));
+        holder.tv_OrderID.setText(String.valueOf("ID : " + model.getKey()));
+        holder.tv_total_order_price.setText(String.valueOf("Total Order Price : " + model.getTotalOrderPrice()));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.sub_recyclerView.getContext());
-        holder.sub_recyclerView.setLayoutManager(layoutManager);
+        holder.sub_recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         FragmentViewModel.getMUTABLE_SUBORDER_RECYCLER().observe((LifecycleOwner) context, new Observer<List<SubReceipt>>() {
             @Override
             public void onChanged(List<SubReceipt> subReceipts) {
-                subAdapter = new SubOrderAdapter(context , subReceipts);
+                subAdapter = new SubOrderAdapter(context, subReceipts);
                 holder.sub_recyclerView.setAdapter(subAdapter);
                 Log.i("TAG" , subReceipts.size()+ "");
+
             }
         });
-
 
     }
 

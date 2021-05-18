@@ -21,6 +21,7 @@ import com.example.otlob.databinding.ActivityHomeBinding;
 import com.example.otlob.fragment.CartFragment;
 import com.example.otlob.fragment.CategoryFragment;
 import com.example.otlob.fragment.OrderFragment;
+import com.example.otlob.fragment.ProfileFragment;
 import com.example.otlob.viewmodel.UserViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -114,7 +115,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 loadFragment(new CartFragment());
                 break;
             case R.id.profile_drawer:
-                Toast.makeText(this, "Profile", Toast.LENGTH_LONG).show();
+                loadFragment(new ProfileFragment());
                 break;
             case R.id.sign_out_drawer:
                 UserViewModel.getINSTANCE().signOut(googleSignInClient, this);
