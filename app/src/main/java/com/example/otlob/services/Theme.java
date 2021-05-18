@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
@@ -34,6 +35,19 @@ public class Theme {
 
     }
 
+    public void theme(Context context){
+
+        sharedPreferences = context.getSharedPreferences(DARK, context.MODE_PRIVATE);
+        final boolean booleanValue = sharedPreferences.getBoolean(DARK_KEY, false);
+
+        if (booleanValue) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+    }
+
     public void theme(Context context, ConstraintLayout background, int lightImage, int darkImage, SwitchCompat switchCompat){
 
         sharedPreferences = context.getSharedPreferences(DARK, context.MODE_PRIVATE);
@@ -50,5 +64,7 @@ public class Theme {
         }
 
     }
+
+
 
 }

@@ -19,6 +19,7 @@ import com.example.otlob.R;
 import com.example.otlob.adapter.CategoryItemAdapter;
 import com.example.otlob.databinding.FragmentPizzaBinding;
 import com.example.otlob.model.CategoryItem;
+import com.example.otlob.services.Theme;
 import com.example.otlob.viewmodel.FragmentViewModel;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
@@ -27,6 +28,8 @@ import java.util.List;
 
 
 public class PizzaFragment extends Fragment {
+
+    private Theme theme = new Theme();
 
     private FragmentViewModel model;
     private FragmentPizzaBinding binding;
@@ -70,6 +73,7 @@ public class PizzaFragment extends Fragment {
             }
         });
 
+        theme.theme(getContext());
 
         return view;
     }

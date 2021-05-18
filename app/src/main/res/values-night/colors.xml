@@ -7,8 +7,9 @@
     <color name="Opacity">#4D84A4DC</color>
     <color name="Profile">#84A4DC</color>
     <color name="Switch">#0C141C</color>
+    <color name="Pizza">#0C141C</color>
 
-    <color name="textColor" tools:ignore="MissingDefaultResource">#FFFFFF</color>
+    <color name="textColor">#FFFFFF</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/holo_orange_dark</color>
 
