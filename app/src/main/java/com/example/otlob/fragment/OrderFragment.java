@@ -20,6 +20,7 @@ import com.example.otlob.adapter.OrderAdapter;
 import com.example.otlob.adapter.SubOrderAdapter;
 import com.example.otlob.databinding.FragmentOrderBinding;
 import com.example.otlob.model.Receipt;
+import com.example.otlob.services.Theme;
 import com.example.otlob.viewmodel.FragmentViewModel;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public class OrderFragment extends Fragment {
     private FragmentViewModel model;
     private FragmentOrderBinding binding;
     private OrderAdapter adapter;
+
+    private Theme theme = new Theme();
 
 
     @Override
@@ -53,6 +56,8 @@ public class OrderFragment extends Fragment {
 //                Log.i("TAG" , receipts.size()+ "");
             }
         });
+
+        theme.theme(getContext(), binding.bgParent, R.drawable.cart, R.drawable.order_dark);
 
         return view;
     }

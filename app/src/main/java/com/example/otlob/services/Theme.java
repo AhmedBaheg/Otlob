@@ -50,7 +50,7 @@ public class Theme {
 
     }
 
-    /** Cart Fragment */
+    /** Cart Fragment & Order Fragment */
     public void theme(Context context, RelativeLayout background, int lightImage, int darkImage ){
 
         sharedPreferences = context.getSharedPreferences(DARK, context.MODE_PRIVATE);
