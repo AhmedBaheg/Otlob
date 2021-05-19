@@ -8,6 +8,10 @@
     <color name="Profile">#84A4DC</color>
     <color name="Switch">#0C141C</color>
     <color name="Pizza">#0C141C</color>
+    <color name="textColorItem">#FFF</color>
+    <color name="firstBorderItem">#84A4DC</color>
+    <color name="secondBorderItem">#0C141C</color>
+    <color name="itemCard">#84A4DC</color>
 
     <color name="textColor">#FFFFFF</color>
 

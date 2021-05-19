@@ -17,6 +17,7 @@ import com.example.otlob.activity.Home;
 import com.example.otlob.databinding.FragmentItemBinding;
 import com.example.otlob.model.CategoryItem;
 import com.example.otlob.services.Constants;
+import com.example.otlob.services.Theme;
 import com.example.otlob.viewmodel.FragmentViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -27,9 +28,7 @@ public class ItemFragment extends Fragment {
     private FragmentViewModel model;
     private FragmentItemBinding binding;
 
-    public ItemFragment() {
-        // Required empty public constructor
-    }
+    private Theme theme = new Theme();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,7 @@ public class ItemFragment extends Fragment {
 
         returnData();
 
+        theme.theme(getContext(), binding.bgParent, R.drawable.item, R.drawable.item_dark);
 
         return view;
     }

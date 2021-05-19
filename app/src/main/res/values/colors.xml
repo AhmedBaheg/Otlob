@@ -8,6 +8,10 @@
     <color name="Profile">#F1F1F1</color>
     <color name="Switch">#FFA544</color>
     <color name="Pizza">#FFF</color>
+    <color name="textColorItem">#FFA544</color>
+    <color name="firstBorderItem">#FFF</color>
+    <color name="secondBorderItem">#FFA544</color>
+    <color name="itemCard">#FFF</color>
 
     <color name="textColor">#000000</color>
 
