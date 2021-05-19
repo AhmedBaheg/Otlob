@@ -12,6 +12,7 @@
     <color name="firstBorderItem">#84A4DC</color>
     <color name="secondBorderItem">#0C141C</color>
     <color name="itemCard">#84A4DC</color>
+    <color name="borderCart">#84A4DC</color>
 
     <color name="textColor">#FFFFFF</color>
 

@@ -20,6 +20,7 @@ import com.example.otlob.activity.Home;
 import com.example.otlob.adapter.CartItemAdapter;
 import com.example.otlob.databinding.FragmentCartBinding;
 import com.example.otlob.model.MyCart;
+import com.example.otlob.services.Theme;
 import com.example.otlob.viewmodel.FragmentViewModel;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class CartFragment extends Fragment {
     private FragmentViewModel model;
     private FragmentCartBinding binding;
     private CartItemAdapter adapter;
+
+    private Theme theme = new Theme();
 
     int temp;
 
@@ -83,6 +86,8 @@ public class CartFragment extends Fragment {
                 ((Home) getActivity()).binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             }
         });
+
+        theme.theme(getContext(), binding.bgParent, R.drawable.cart, R.drawable.order_dark);
 
         return view;
     }

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/cart"
+        android:id="@+id/bg_parent"
         tools:context=".fragment.CartFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -32,7 +33,7 @@
             android:layout_marginEnd="35dp"
             android:layout_marginRight="35dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/tv_border_orange"
+            android:background="@drawable/border_orange_to_cart"
             android:gravity="center"
             android:src="@drawable/ic_add"
             android:contentDescription="@string/todo" />
@@ -51,7 +52,7 @@
             android:layout_marginEnd="100dp"
             android:layout_marginRight="100dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/tv_border_orange"
+            android:background="@drawable/border_orange_to_cart"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -72,7 +73,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2.5dp"
                 android:layout_weight="1"
-                android:background="@drawable/tv_border_white"
+                android:background="@drawable/white_border_to_cart"
                 android:gravity="center"
                 android:text="@string/_0_egp"
                 android:textColor="@color/colorPrimaryDark"
