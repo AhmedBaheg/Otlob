@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.otlob.activity.Home;
 import com.example.otlob.activity.Login;
 import com.example.otlob.model.User;
+import com.example.otlob.model.UserProfile;
 import com.example.otlob.services.Constants;
 import com.facebook.AccessToken;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class UserViewModel extends ViewModel {
 
     // Constants
-    private static MutableLiveData<User> MUTABLE;
+    private static MutableLiveData<UserProfile> MUTABLE_USER_PROFILE;
     private static UserViewModel INSTANCE;
     // Firebase
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.USER);
@@ -40,11 +41,11 @@ public class UserViewModel extends ViewModel {
     // Model
     private User user;
 
-    public static MutableLiveData<User> getMUTABLE() {
-        if (MUTABLE == null) {
-            MUTABLE = new MutableLiveData<>();
+    public static MutableLiveData<UserProfile> getMUTABLE_USER_PROFILE() {
+        if (MUTABLE_USER_PROFILE == null) {
+            MUTABLE_USER_PROFILE = new MutableLiveData<>();
         }
-        return MUTABLE;
+        return MUTABLE_USER_PROFILE;
     }
 
     public static UserViewModel getINSTANCE() {
