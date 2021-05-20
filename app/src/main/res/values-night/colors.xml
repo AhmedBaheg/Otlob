@@ -13,9 +13,10 @@
     <color name="secondBorderItem">#0C141C</color>
     <color name="itemCard">#84A4DC</color>
     <color name="borderCart">#84A4DC</color>
+    <color name="Icons">#84A4DC</color>
 
     <color name="textColor">#FFFFFF</color>
 
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/holo_orange_dark</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@android:color/white</color>
 
 </resources>

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.otlob.R;
 import com.example.otlob.databinding.ActivityMainBinding;
+import com.example.otlob.services.Theme;
 import com.example.otlob.viewmodel.UserViewModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityMainBinding binding;
+    private Theme theme = new Theme();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         binding.btnSignIn.setOnClickListener(this);
         binding.btnRegister.setOnClickListener(this);
+
+        theme.theme(this, binding.bgParent, R.drawable.choose, R.drawable.choose_dark);
 
     }
 

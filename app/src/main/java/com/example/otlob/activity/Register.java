@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.otlob.R;
 import com.example.otlob.databinding.ActivityRegisterBinding;
+import com.example.otlob.services.Theme;
 import com.example.otlob.services.Validation;
 import com.example.otlob.viewmodel.UserViewModel;
 
@@ -16,6 +17,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private ActivityRegisterBinding binding;
     public UserViewModel model;
+
+    private Theme theme = new Theme();
 
     private String str_FullName, str_Email, str_Password, str_PhoneNumber;
 
@@ -29,6 +32,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
 
         binding.btnRegisterNow.setOnClickListener(this);
+
+        theme.theme(this, binding.bgParent, R.drawable.register, R.drawable.register_dark);
 
     }
 

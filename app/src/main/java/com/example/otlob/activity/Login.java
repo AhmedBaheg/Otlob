@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.otlob.R;
 import com.example.otlob.databinding.ActivityLoginBinding;
+import com.example.otlob.services.Theme;
 import com.example.otlob.services.Validation;
 import com.example.otlob.viewmodel.UserViewModel;
 import com.facebook.AccessToken;
@@ -54,6 +55,8 @@ public class Login extends AppCompatActivity {
     private final static int RC_SIGN_IN_FACEBOOK = 64206;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
+
+    private Theme theme = new Theme();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +103,8 @@ public class Login extends AppCompatActivity {
                 requestSignInToFacebook();
             }
         });
+
+        theme.theme(this, binding.bgParent, R.drawable.login, R.drawable.login_dark);
 
     }
 

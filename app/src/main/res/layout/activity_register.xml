@@ -9,11 +9,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:fillViewport="true"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         tools:context=".activity.Register">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bg_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/register">
@@ -26,7 +27,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="250dp"
                 android:text="@string/register_"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -166,15 +167,16 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/relative"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ed_phone_number"
-                app:layout_constraintBottom_toTopOf="@+id/relative"/>
+                app:layout_constraintTop_toBottomOf="@+id/ed_phone_number" />
 
             <RelativeLayout
                 android:id="@+id/relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -188,7 +190,7 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
                     android:text="@string/already_have_an_account"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@color/textColor" />
 
                 <TextView
                     android:layout_width="wrap_content"

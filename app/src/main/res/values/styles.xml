@@ -29,7 +29,7 @@
     <style name="HintAppearance" parent="TextAppearance.Design.Hint">
 
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">@color/textColor</item>
 
     </style>
 
