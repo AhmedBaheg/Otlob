@@ -1,5 +1,6 @@
 package com.example.otlob.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -14,11 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.example.otlob.R;
 import com.example.otlob.databinding.FragmentProfileBinding;
 import com.example.otlob.services.Theme;
 import com.example.otlob.viewmodel.FragmentViewModel;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -45,6 +49,30 @@ public class ProfileFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         View view = binding.getRoot();
 
+        binding.imgUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON_TOUCH)
+                        .setAspectRatio(1, 1)
+                        .setAutoZoomEnabled(true)
+                        .start(getContext(), ProfileFragment.this);
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        switchTheme();
+
+
+
+    }
+
+    private void switchTheme() {
         sharedPreferences = getActivity().getSharedPreferences(DARK, MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -72,8 +100,18 @@ public class ProfileFragment extends Fragment {
             }
 
         });
-
-        return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+
+
+        }
+
+    }
 }

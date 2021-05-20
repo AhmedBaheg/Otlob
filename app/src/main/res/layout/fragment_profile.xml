@@ -30,7 +30,7 @@
                 android:layout_width="194dp"
                 android:layout_height="194dp"
                 android:layout_gravity="center"
-                android:src="@drawable/placeholder"
+                android:src="@drawable/default_pic_user"
                 app:civ_border_color="@color/colorPrimaryDark"
                 app:civ_border_width="1dp" />
 
@@ -46,7 +46,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:gravity="center"
                 android:background="@color/Profile"
                 android:orientation="horizontal"
@@ -81,7 +81,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
                 android:gravity="center"
                 android:background="@color/Profile"
                 android:orientation="horizontal"
@@ -116,7 +116,42 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="@color/Profile"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:weightSum="2"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/phone"
+                    android:textColor="@color/textColor"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/_01159052922"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:gravity="center"
                 android:background="@color/Profile"
                 android:orientation="horizontal"
