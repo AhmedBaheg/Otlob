@@ -2,17 +2,20 @@ package com.example.otlob.viewmodel;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
+import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.otlob.fragment.ProfileFragment;
 import com.example.otlob.model.CategoryItem;
 import com.example.otlob.model.MyCart;
 import com.example.otlob.model.Receipt;
 import com.example.otlob.model.SubReceipt;
+import com.example.otlob.model.UserProfile;
 import com.example.otlob.services.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +24,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,25 +40,32 @@ public class FragmentViewModel extends ViewModel {
     private static MutableLiveData<List<SubReceipt>> MUTABLE_SUBORDER_RECYCLER;
     private static MutableLiveData<CategoryItem> MUTABLE_ITEM;
     private static MutableLiveData<CategoryItem> MUTABLE_SIZE;
+    private static MutableLiveData<UserProfile> MUTABLE_RETURN_DATA;
     private static FragmentViewModel INSTANCE;
 
     // Firebase
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.USER);
     private DatabaseReference refCategory = FirebaseDatabase.getInstance().getReference(Constants.CATEGORY);
     private DatabaseReference refSize = FirebaseDatabase.getInstance().getReference(Constants.SIZE);
     private DatabaseReference refCart = FirebaseDatabase.getInstance().getReference(Constants.CART);
     private DatabaseReference refOrder = FirebaseDatabase.getInstance().getReference(Constants.ORDER);
+    private StorageReference userProfileRef = FirebaseStorage.getInstance().getReference("Profile Images");
 
     // Model
     private CategoryItem model;
     private MyCart cart;
     private Receipt receipt;
     private SubReceipt subReceipt;
+    private UserProfile userProfile;
 
     // ArrayList
     private ArrayList<CategoryItem> itemArrayList;
     private ArrayList<MyCart> cartArrayList;
     private ArrayList<Receipt> orderArrayList;
     private ArrayList<SubReceipt> subReceiptArrayList;
+
+    // Fragments
+    ProfileFragment profile = new ProfileFragment();
 
     // Methods
     public static MutableLiveData<List<CategoryItem>> getMUTABLE_RECYCLER() {
@@ -95,6 +108,13 @@ public class FragmentViewModel extends ViewModel {
             MUTABLE_SIZE = new MutableLiveData<>();
         }
         return MUTABLE_SIZE;
+    }
+
+    public static MutableLiveData<UserProfile> getMUTABLE_RETURN_DATA() {
+        if (MUTABLE_RETURN_DATA == null) {
+            MUTABLE_RETURN_DATA = new MutableLiveData<>();
+        }
+        return MUTABLE_RETURN_DATA;
     }
 
     public static FragmentViewModel getINSTANCE() {
@@ -259,17 +279,20 @@ public class FragmentViewModel extends ViewModel {
     public void getItemToOrderInRecycler() {
 
         orderArrayList = new ArrayList<>();
+        subReceiptArrayList = new ArrayList<>();
 
         refOrder.child(Constants.getUID()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 orderArrayList.clear();
+                subReceiptArrayList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     receipt = dataSnapshot.getValue(Receipt.class);
                     orderArrayList.add(0, receipt);
                     Constants.ORDER_KEY = dataSnapshot.getKey();
-                    getSubItemToSubOrderInRecycler(dataSnapshot.getKey());
+
+                    getSubItemToSubOrderInRecycler(Constants.ORDER_KEY);
                 }
                 FragmentViewModel.getMUTABLE_ORDER_RECYCLER().setValue(orderArrayList);
             }
@@ -282,26 +305,27 @@ public class FragmentViewModel extends ViewModel {
 
     }
 
-    public void getSubItemToSubOrderInRecycler(String keys) {
+    public void getSubItemToSubOrderInRecycler(String key) {
 
         subReceiptArrayList = new ArrayList<>();
+        subReceipt = new SubReceipt();
+//        Log.i("TAG", key + "");
 
-        refOrder.child(Constants.getUID()).child(keys).addValueEventListener(new ValueEventListener() {
+        refOrder.child(Constants.getUID()).child(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 subReceiptArrayList.clear();
                 for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
 
                     if (!dataSnapshot1.getKey().equalsIgnoreCase("key")
                             && !dataSnapshot1.getKey().equalsIgnoreCase("totalOrderPrice")) {
-
                         subReceipt = dataSnapshot1.getValue(SubReceipt.class);
                         subReceiptArrayList.add(0, subReceipt);
+//                        Log.i("TAG", subReceipt.getId() + "");
+                        FragmentViewModel.getMUTABLE_SUBORDER_RECYCLER().setValue(subReceiptArrayList);
                     }
-
                 }
-//                Log.i("TAG" , subReceiptArrayList.size()+ "");
-                FragmentViewModel.getMUTABLE_SUBORDER_RECYCLER().setValue(subReceiptArrayList);
             }
 
             @Override
@@ -309,6 +333,62 @@ public class FragmentViewModel extends ViewModel {
 
             }
         });
+    }
+
+    public void uploadImgUserProfileOnDB(final Context context, Uri uri) {
+
+        StorageReference fillPath = userProfileRef.child(Constants.getUID() + ".jpg");
+
+        fillPath.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if (task.isSuccessful()) {
+                    downloadImgUserProfileInDB(context, fillPath);
+                } else {
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+    private void downloadImgUserProfileInDB(Context context, StorageReference fillPath) {
+
+        fillPath.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+
+                if (task.isSuccessful()) {
+
+                    String downloadUrl = task.getResult().toString();
+                    ref.child(Constants.getUID()).child("imgUrl").setValue(downloadUrl);
+
+                } else {
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+    }
+
+    public void returnData() {
+
+        ref.child(Constants.getUID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                userProfile = snapshot.getValue(UserProfile.class);
+                FragmentViewModel.getMUTABLE_RETURN_DATA().setValue(userProfile);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

@@ -2,16 +2,12 @@ package com.example.otlob.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-
-import com.example.otlob.R;
 
 public class Theme {
 
