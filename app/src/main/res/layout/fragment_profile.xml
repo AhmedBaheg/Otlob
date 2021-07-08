@@ -73,7 +73,6 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/ahmed_baheg"
                     android:textColor="@color/textColor"
                     android:textSize="15sp" />
 
@@ -108,7 +107,6 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/ahmed_bahig77_gmail_com"
                     android:textColor="@color/textColor"
                     android:textSize="15sp" />
 
@@ -143,7 +141,6 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/_01159052922"
                     android:textColor="@color/textColor"
                     android:textSize="15sp" />
 

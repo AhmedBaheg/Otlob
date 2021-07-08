@@ -1,10 +1,8 @@
 package com.example.otlob.viewmodel;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -129,7 +127,7 @@ public class UserViewModel extends ViewModel {
                         } else {
                             // If sign in fails, display a message to the user.
                             String message = task.getException().toString();
-                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                         }
 
                         // ...

@@ -1,11 +1,9 @@
 package com.example.otlob.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.otlob.R;
 import com.example.otlob.model.SubReceipt;
-import com.example.otlob.model.SubReceipt;
-import com.example.otlob.viewmodel.FragmentViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -74,6 +70,7 @@ public class SubOrderAdapter extends RecyclerView.Adapter<SubOrderAdapter.ViewHo
 
     @Override
     public int getItemCount() {
+//        Log.i("TAG" , SubReceiptList.size()+ "");
         return SubReceiptList.size();
     }
 
